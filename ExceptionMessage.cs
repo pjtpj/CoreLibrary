@@ -29,7 +29,8 @@ namespace Core
 
 			try
 			{
-				sb.Append(GetASPSettings());
+				if (HttpContext.Current != null)
+					sb.Append(GetASPSettings());
 			}
 			catch(Exception e)
 			{
@@ -332,22 +333,25 @@ namespace Core
 			sb.Append(ProcessIdentity());
 			sb.AppendLine();
 
-			sb.Append("Remote User:           ");
-			sb.Append(HttpContext.Current.Request.ServerVariables["REMOTE_USER"]);
-			sb.AppendLine();
+			if (HttpContext.Current != null)
+			{
+				sb.Append("Remote User:           ");
+				sb.Append(HttpContext.Current.Request.ServerVariables["REMOTE_USER"]);
+				sb.AppendLine();
 
-			sb.Append("Remote Address:        ");
-			sb.Append(HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"]);
-			sb.AppendLine();
+				sb.Append("Remote Address:        ");
+				sb.Append(HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"]);
+				sb.AppendLine();
 
-			sb.Append("Remote Host:           ");
-			sb.Append(HttpContext.Current.Request.ServerVariables["REMOTE_HOST"]);
-			sb.AppendLine();
+				sb.Append("Remote Host:           ");
+				sb.Append(HttpContext.Current.Request.ServerVariables["REMOTE_HOST"]);
+				sb.AppendLine();
 
-			sb.Append("URL:                   ");
-			sb.Append(WebCurrentUrl());
-			sb.AppendLine();
-			sb.AppendLine();
+				sb.Append("URL:                   ");
+				sb.Append(WebCurrentUrl());
+				sb.AppendLine();
+				sb.AppendLine();
+			}
 
 			sb.Append("NET Runtime version:   ");
 			sb.Append(System.Environment.Version.ToString());
