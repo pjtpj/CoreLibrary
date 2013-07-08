@@ -64,6 +64,23 @@ namespace Core
 			}
 		}
 
+		public void RenameFile(string folder, string oldFile, string newFile)
+		{
+			string url = string.Format("http://{0}/post.php?Password={1}&Action=Rename&Folder={2}&File={3}&NewFile={4}", BlobHost, BlobPassword, folder, oldFile, newFile);
+
+			HttpClient client = new HttpClient();
+			using (HttpWebResponse webResponse = client.GetHttpWebResponse(url))
+			{
+				using (StreamReader reader = new StreamReader(webResponse.GetResponseStream()))
+				{
+					Response = reader.ReadToEnd();
+					ResponseCode = Response.Substring(0, 3);
+					if (ResponseCode != "200")
+						throw new ApplicationException(string.Format("Blob rename file failed: {0}", Response));
+				}
+			}
+		}
+
 		protected static string _szBoundary    = "SEPARATORSTRINGTEZTECHDOTCOM1";
 		protected static string _szBoundary2   = "\r\n--SEPARATORSTRINGTEZTECHDOTCOM1\r\n";
 		protected static string _szBoundary3   = "\r\n--SEPARATORSTRINGTEZTECHDOTCOM1--";
