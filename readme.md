@@ -1,8 +1,6 @@
 CoreLibrary
-Copyright (C) 2006 - 2009 Teztech, Inc.
-All Rights Reserved.
 
-OVERVIEW
+===========
 
 CoreLibrary is a C# library which contains standard routines used by Teztech 
 C# applications. This library should be able to be used by:

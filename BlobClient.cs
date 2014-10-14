@@ -152,8 +152,8 @@ namespace Core
 					while (true)
 					{
 						string line = reader.ReadLine();
-						if (line == null)
-							break;
+                        if (line == null)
+                            throw new ApplicationException(string.Format("Unexpected end of stream while listing files in folder '{0}'", folder));
 						if (line.StartsWith(string.Format("200 {0} files listed", files.Count)))
 							break;
 
